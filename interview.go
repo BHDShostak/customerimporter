@@ -7,6 +7,7 @@ import (
 	"os"
 	"sort"
 	"strings"
+	"time"
 )
 
 // Customer struct represents the structure of customer data
@@ -61,7 +62,10 @@ func getDomain(email string) string {
 }
 
 func main() {
-	filename := "customers.csv"
+
+	startTime := time.Now()
+
+	filename := "1mcustomers.csv" // 1mcustomers.csv - 1 million lines, 3kcustomers.csv - 3000 lines.
 	customers, err := readCustomers(filename)
 	if err != nil {
 		log.Fatalf("Error reading customers from file: %v", err)
@@ -86,4 +90,9 @@ func main() {
 	for _, domain := range domains {
 		fmt.Printf("Domain: %s, Customers: %d\n", domain, domainCounts[domain])
 	}
+
+	elapsedTime := time.Since(startTime)
+
+	fmt.Printf("Your code took %s to run.\n", elapsedTime)
+
 }
